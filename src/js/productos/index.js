@@ -14,7 +14,11 @@ btnCancelar.parentElement.style.display = 'none'
 const guardar = async (evento) => {
     evento.preventDefault();
     if(!validarFormulario(formulario, ['producto_id'])){
-        alert('Debe llenar todos los campos');
+        Swal.fire({
+            icon:'error',
+            title:"Error",
+            text:`Por favor ingrese todos los campos`,
+        });
         return 
     }
 
