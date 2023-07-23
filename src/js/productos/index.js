@@ -172,7 +172,7 @@ const modificar = async () => {
 };
 
 const eliminar = async (id) => {
-    if (await Swal.fire({
+    const result = await Swal.fire({
         icon: 'warning',
         title: 'Eliminar producto',
         text: '¿Desea eliminar este producto?',
@@ -181,7 +181,9 @@ const eliminar = async (id) => {
         cancelButtonColor: '#3085d6',
         confirmButtonText: 'Eliminar',
         cancelButtonText: 'Cancelar',
-    }))  {
+    });
+
+    if (result.isConfirmed) {
         const body = new FormData();
         body.append('producto_id', id);
         body.append('tipo', 3); // Tipo 3 para indicar que es una operación de eliminar
@@ -210,10 +212,17 @@ const eliminar = async (id) => {
                     break;
             }
 
-            alert(mensaje);
+            Swal.fire({
+                icon: codigo === 1 ? 'success' : 'error',
+                title: codigo === 1 ? 'Éxito' : 'Error',
+                text: mensaje,
+            });
+
         } catch (error) {
             console.log(error);
         }
+    }else{
+        
     }
 };
 
