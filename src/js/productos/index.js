@@ -127,8 +127,9 @@ const buscar = async () => {
             tr.appendChild(td)
             fragment.appendChild(tr);
         }
-
+        divTabla.style.display = data.length > 0 ? '' : 'none';
         tablaProductos.tBodies[0].appendChild(fragment)
+
     } catch (error) {
         console.log(error);
     }
@@ -260,7 +261,7 @@ const cancelarAccion = () => {
 }
 
 
-buscar();
+// buscar();
 
 
 btnModificar.addEventListener('click', modificar);
