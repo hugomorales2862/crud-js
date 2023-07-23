@@ -126,11 +126,90 @@ const buscar = async () => {
     }
 }
 
+
+const modificar = async () => {
+    const body = new FormData(formulario);
+    body.append('tipo', 2); // Tipo 2 para indicar que es una operación de modificar
+    const url = '/crudphp18may2023/controladores/productos/index.php';
+    const config = {
+        method: 'POST',
+        body,
+    };
+
+    try {
+        const respuesta = await fetch(url, config);
+        const data = await respuesta.json();
+
+        const { codigo, mensaje, detalle } = data;
+
+        switch (codigo) {
+            case 1:
+                formulario.reset();
+                buscar();
+                cancelarAccion();
+                break;
+
+            case 0:
+                console.log(detalle);
+                break;
+
+            default:
+                break;
+        }
+
+        alert(mensaje);
+    } catch (error) {
+        console.log(error);
+    }
+};
+
+const eliminar = async (id) => {
+    if (confirm('¿Desea eliminar este producto?')) {
+        const body = new FormData();
+        body.append('producto_id', id);
+        body.append('tipo', 3); // Tipo 3 para indicar que es una operación de eliminar
+        const url = '/crudphp18may2023/controladores/productos/index.php';
+        const config = {
+            method: 'POST',
+            body,
+        };
+
+        try {
+            const respuesta = await fetch(url, config);
+            const data = await respuesta.json();
+
+            const { codigo, mensaje, detalle } = data;
+
+            switch (codigo) {
+                case 1:
+                    buscar();
+                    break;
+
+                case 0:
+                    console.log(detalle);
+                    break;
+
+                default:
+                    break;
+            }
+
+            alert(mensaje);
+        } catch (error) {
+            console.log(error);
+        }
+    }
+};
+
+
+
+
+
+
 const colocarDatos = (datos) => {
     formulario.producto_nombre.value = datos.PRODUCTO_NOMBRE
     formulario.producto_precio.value = datos.PRODUCTO_PRECIO
     formulario.producto_id.value = datos.PRODUCTO_ID
-
+    
     btnGuardar.disabled = true
     btnGuardar.parentElement.style.display = 'none'
     btnBuscar.disabled = true
@@ -155,15 +234,10 @@ const cancelarAccion = () => {
 }
 
 
-const eliminar = (id) => {
-    if(confirm("¿Desea eliminar este producto?")){
-        alert("eliminando")
-    }
-}
-
-
 buscar();
 
+
+btnModificar.addEventListener('click', modificar);
 formulario.addEventListener('submit', guardar )
 btnBuscar.addEventListener('click', buscar)
 btnCancelar.addEventListener('click', cancelarAccion)

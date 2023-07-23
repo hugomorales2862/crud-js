@@ -33,7 +33,7 @@
             </div>
         </form>
     </div>
-    <div class="row justify-content-center" id="divTabla">
+    <div class="row justify-content-center" id="divTabla" >
         <div class="col-lg-8">
             <h2>Listado de productos</h2>
             <table class="table table-bordered table-hover" id="tablaProductos">
