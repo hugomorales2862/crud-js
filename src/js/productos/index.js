@@ -172,7 +172,16 @@ const modificar = async () => {
 };
 
 const eliminar = async (id) => {
-    if (confirm('¿Desea eliminar este producto?')) {
+    if (await Swal.fire({
+        icon: 'warning',
+        title: 'Eliminar producto',
+        text: '¿Desea eliminar este producto?',
+        showCancelButton: true,
+        confirmButtonColor: '#d33',
+        cancelButtonColor: '#3085d6',
+        confirmButtonText: 'Eliminar',
+        cancelButtonText: 'Cancelar',
+    }))  {
         const body = new FormData();
         body.append('producto_id', id);
         body.append('tipo', 3); // Tipo 3 para indicar que es una operación de eliminar
