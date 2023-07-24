@@ -7,7 +7,7 @@
         switch($metodo){
             case 'POST':
                 $cliente =  new Cliente ($_POST);
-                if($tip == 1){
+                if($tipo == 1){
                     $resultado = $cliente->guardar();
                     $mensaje = "Se guardo correctamente";
                 }
@@ -23,7 +23,7 @@
                     echo json_encode([
                         'mensaje' => $mensaje,
                         'codigo' => 1,
-                    ])
+                    ]);
                 }else{
                     echo json_encode([
                         'mensaje' => $mensaje,
