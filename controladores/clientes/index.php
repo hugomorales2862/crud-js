@@ -33,8 +33,8 @@
                 }
                 break;
             case 'GET':
-                $cliente = new Cliente($_GET);
-                $clientes = $producto->buscar();
+                $cliente = new Cliente ($_GET);
+                $clientes = $cliente->buscar();
                 echo json_encode($clientes);
                 break;
             default:
